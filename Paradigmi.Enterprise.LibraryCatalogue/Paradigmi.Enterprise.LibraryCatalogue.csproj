@@ -17,4 +17,8 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Paradigmi.Enterprise.Models\Paradigmi.Enterprise.Models.csproj" />
+  </ItemGroup>
+
 </Project>

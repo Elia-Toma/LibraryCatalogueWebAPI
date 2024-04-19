@@ -12,7 +12,7 @@ namespace Paradigmi.Enterprise.Models.Entities
 		public int IdCategoria { get; set; }
 		public string Nome { get; set; }
 		public string Autore { get; set; }
-		public DateTime DataDiPubblicazione { get; set; }
+		public DateTime DataPubblicazione { get; set; }
 		public string Editore { get; set; }
 		public virtual ICollection<Categoria> Categorie { get; set; }
 	}

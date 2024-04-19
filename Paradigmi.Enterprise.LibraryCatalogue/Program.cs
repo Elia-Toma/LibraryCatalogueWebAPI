@@ -1,7 +1,9 @@
+using System.Data.SqlClient;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Paradigmi.Enterprise.LibraryCatalogue.Data;
-
+using Paradigmi.Enterprise.Models.Context;
+/*
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -43,3 +45,47 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+*/
+
+
+// TEST COLLEGAMENTO DB
+
+// Aggiungo una categoria
+using (var connection = new SqlConnection())
+{
+	connection.ConnectionString = "Server=localhost;Database=ProgettoEnterprise;User Id=enterprise;Password=enterprise;";
+	connection.Open();
+
+	var cmd = new SqlCommand();
+	cmd.Connection = connection;
+	cmd.CommandText = "INSERT INTO Categorie(Nome) VALUES(@NOME);";
+	cmd.Parameters.AddWithValue("@NOME", "Fisica");
+	cmd.ExecuteNonQuery();
+}
+
+// Aggiungo un libro
+using (var connection = new SqlConnection())
+{
+	connection.ConnectionString = "Server=localhost;Database=ProgettoEnterprise;User Id=enterprise;Password=enterprise;";
+	connection.Open();
+
+	var cmd = new SqlCommand();
+	cmd.Connection = connection;
+	cmd.CommandText = "INSERT INTO Libri(Nome, Autore, DataPubblicazione, Editore, IdCategoria) VALUES(@NOME,@AUTORE,@DATA_PUBBLICAZIONE,@EDITORE,@ID_CATEGORIA);";
+	cmd.Parameters.AddWithValue("@NOME", "Inseguendo un raggio di luce");
+	cmd.Parameters.AddWithValue("@AUTORE", "Amedeo Balbi");
+	cmd.Parameters.AddWithValue("@DATA_PUBBLICAZIONE", "28/09/2021");
+	cmd.Parameters.AddWithValue("@EDITORE", "Rizzoli");
+	cmd.Parameters.AddWithValue("@ID_CATEGORIA", "1");
+	cmd.ExecuteNonQuery();
+}
+
+{
+	var ctx = new MyDbContext();
+	var libri = ctx.Libri.ToList();
+}
+
+/*
+ * Vedere EntityFrameworkExample nel progetto del prof per le Query di filtro e i metodi add, edit e tutto il resto
+ * Il prof usa la sintassi fluida
+*/

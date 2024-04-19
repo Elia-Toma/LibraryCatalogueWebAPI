@@ -9,7 +9,10 @@ using Paradigmi.Enterprise.Models.Entities;
 
 namespace Paradigmi.Enterprise.Models.Configurations
 {
-	internal class UtenteConfiguration : IEntityTypeConfiguration<Utente>
+	/*
+	 * Mapping della classe Utente per il DB
+	 */
+	public class UtenteConfiguration : IEntityTypeConfiguration<Utente>
 	{
 		public void Configure(EntityTypeBuilder<Utente> builder)
 		{
@@ -20,7 +23,5 @@ namespace Paradigmi.Enterprise.Models.Configurations
 			builder.Property(u => u.Cognome).HasMaxLength(50).IsRequired();
 			builder.Property(u => u.Password).HasMaxLength(50).IsRequired();
 		}
-	}
-	{
 	}
 }

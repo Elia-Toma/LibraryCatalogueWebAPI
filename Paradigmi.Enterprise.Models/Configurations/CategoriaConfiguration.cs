@@ -9,7 +9,10 @@ using Paradigmi.Enterprise.Models.Entities;
 
 namespace Paradigmi.Enterprise.Models.Configurations
 {
-	internal class CategoriaConfiguration : IEntityTypeConfiguration<Categoria>
+	/*
+	 * Mapping della classe Categoria per il DB
+	 */
+	public class CategoriaConfiguration : IEntityTypeConfiguration<Categoria>
 	{
 		public void Configure(EntityTypeBuilder<Categoria> builder)
 		{

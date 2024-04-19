@@ -9,6 +9,9 @@ using Paradigmi.Enterprise.Models.Entities;
 
 namespace Paradigmi.Enterprise.Models.Configurations
 {
+	/*
+	 * Mapping della classe Libro per il DB
+	 */
 	public class LibroConfigurations : IEntityTypeConfiguration<Libro>
 	{
 		public void Configure(EntityTypeBuilder<Libro> builder)
@@ -18,7 +21,7 @@ namespace Paradigmi.Enterprise.Models.Configurations
 			builder.Property(p=>p.Nome).HasMaxLength(50).IsRequired();
 			builder.Property(p=>p.Autore).HasMaxLength(50).IsRequired();
 			builder.Property(p=>p.Editore).HasMaxLength(50).IsRequired();
-			builder.Property(p => p.DataDiPubblicazione).HasColumnType("date").IsRequired();
+			builder.Property(p => p.DataPubblicazione).HasColumnType("date").IsRequired();
 			builder.HasMany(p => p.Categorie);
 		}
 	}

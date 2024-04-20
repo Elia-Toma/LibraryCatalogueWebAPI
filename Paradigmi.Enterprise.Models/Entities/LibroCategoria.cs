@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Paradigmi.Enterprise.Models.Entities
 {
-	public class Categoria
+	public class LibroCategoria
 	{
+		public int IdLibro { get; set; }
+		public Libro Libro { get; set; }
+
 		public int IdCategoria { get; set; }
-		public string Nome { get; set; }
-		public virtual ICollection<Libro> Libri { get; set; }
+		public Categoria Categoria { get; set; }
 	}
+
 }

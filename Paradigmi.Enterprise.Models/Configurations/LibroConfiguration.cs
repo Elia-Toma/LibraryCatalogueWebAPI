@@ -12,7 +12,7 @@ namespace Paradigmi.Enterprise.Models.Configurations
 	/*
 	 * Mapping della classe Libro per il DB
 	 */
-	public class LibroConfigurations : IEntityTypeConfiguration<Libro>
+	public class LibroConfiguration : IEntityTypeConfiguration<Libro>
 	{
 		public void Configure(EntityTypeBuilder<Libro> builder)
 		{

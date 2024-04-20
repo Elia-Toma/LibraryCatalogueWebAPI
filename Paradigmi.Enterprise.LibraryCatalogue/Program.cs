@@ -48,9 +48,13 @@ app.Run();
 */
 
 
+
+
+
 // TEST COLLEGAMENTO DB
 
 // Aggiungo una categoria
+
 using (var connection = new SqlConnection())
 {
 	connection.ConnectionString = "Server=localhost;Database=ProgettoEnterprise;User Id=enterprise;Password=enterprise;";
@@ -59,11 +63,13 @@ using (var connection = new SqlConnection())
 	var cmd = new SqlCommand();
 	cmd.Connection = connection;
 	cmd.CommandText = "INSERT INTO Categorie(Nome) VALUES(@NOME);";
-	cmd.Parameters.AddWithValue("@NOME", "Fisica");
+	cmd.Parameters.AddWithValue("@NOME", "Astronomia");
 	cmd.ExecuteNonQuery();
 }
 
+
 // Aggiungo un libro
+/*
 using (var connection = new SqlConnection())
 {
 	connection.ConnectionString = "Server=localhost;Database=ProgettoEnterprise;User Id=enterprise;Password=enterprise;";
@@ -76,9 +82,10 @@ using (var connection = new SqlConnection())
 	cmd.Parameters.AddWithValue("@AUTORE", "Amedeo Balbi");
 	cmd.Parameters.AddWithValue("@DATA_PUBBLICAZIONE", "28/09/2021");
 	cmd.Parameters.AddWithValue("@EDITORE", "Rizzoli");
-	cmd.Parameters.AddWithValue("@ID_CATEGORIA", "1");
+	cmd.Parameters.AddWithValue("@ID_CATEGORIA", "4"); // Fisica
 	cmd.ExecuteNonQuery();
 }
+*/
 
 {
 	var ctx = new MyDbContext();

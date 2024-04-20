@@ -9,6 +9,9 @@ using Paradigmi.Enterprise.Models.Entities;
 
 namespace Paradigmi.Enterprise.Models.Configurations
 {
+	/*
+	 * Mapping della classe LibroCategoria per il DB
+	 */
 	public class LibroCategoriaConfiguration : IEntityTypeConfiguration<LibroCategoria>
 	{
 		public void Configure(EntityTypeBuilder<LibroCategoria> builder)

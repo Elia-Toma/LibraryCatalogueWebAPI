@@ -7,7 +7,7 @@
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Libri]    Script Date: 19/04/2024 19:09:21 ******/
+/****** Object:  Table [dbo].[Libri]    Script Date: 20/04/2024 16:38:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -18,14 +18,23 @@ CREATE TABLE [dbo].[Libri](
 	[Autore] [varchar](50) NOT NULL,
 	[DataPubblicazione] [date] NOT NULL,
 	[Editore] [varchar](50) NOT NULL,
-	[IdCategoria] [int] NOT NULL,
  CONSTRAINT [PK_Libri] PRIMARY KEY CLUSTERED 
 (
 	[IdLibro] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Utenti]    Script Date: 19/04/2024 19:09:21 ******/
+/****** Object:  Table [dbo].[LibriCategorie]    Script Date: 20/04/2024 16:38:39 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LibriCategorie](
+	[IdLibro] [int] NOT NULL,
+	[IdCategoria] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Utenti]    Script Date: 20/04/2024 16:38:39 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -42,10 +51,15 @@ CREATE TABLE [dbo].[Utenti](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[Libri]  WITH CHECK ADD  CONSTRAINT [FK_Libri_Categorie] FOREIGN KEY([IdCategoria])
+ALTER TABLE [dbo].[LibriCategorie]  WITH CHECK ADD  CONSTRAINT [FK_LibriCategorie_Categorie] FOREIGN KEY([IdCategoria])
 REFERENCES [dbo].[Categorie] ([IdCategoria])
 GO
-ALTER TABLE [dbo].[Libri] CHECK CONSTRAINT [FK_Libri_Categorie]
+ALTER TABLE [dbo].[LibriCategorie] CHECK CONSTRAINT [FK_LibriCategorie_Categorie]
+GO
+ALTER TABLE [dbo].[LibriCategorie]  WITH CHECK ADD  CONSTRAINT [FK_LibriCategorie_Libri] FOREIGN KEY([IdLibro])
+REFERENCES [dbo].[Libri] ([IdLibro])
+GO
+ALTER TABLE [dbo].[LibriCategorie] CHECK CONSTRAINT [FK_LibriCategorie_Libri]
 GO
 USE [master]
 GO

@@ -13,6 +13,7 @@ namespace Paradigmi.Enterprise.Models.Context
 		public DbSet<Libro> Libri { get; set; }
 		public DbSet<Utente> Utenti { get; set; }
 		public DbSet<Categoria> Categorie { get; set; }
+		public DbSet<LibroCategoria> LibriCategorie { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Paradigmi.Enterprise.LibraryCatalogue.Data;
 using Paradigmi.Enterprise.Models.Context;
+using Paradigmi.Enterprise.Models.Entities;
 /*
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,43 +54,55 @@ app.Run();
 
 // TEST COLLEGAMENTO DB
 
-// Aggiungo una categoria
+// Aggiungo delle categorie
 
-using (var connection = new SqlConnection())
+List<Categoria> listaCategorie = new List<Categoria>
 {
-	connection.ConnectionString = "Server=localhost;Database=ProgettoEnterprise;User Id=enterprise;Password=enterprise;";
-	connection.Open();
+	new Categoria { Nome = "Fisica" },
+	new Categoria { Nome = "Astronomia" }
+};
 
-	var cmd = new SqlCommand();
-	cmd.Connection = connection;
-	cmd.CommandText = "INSERT INTO Categorie(Nome) VALUES(@NOME);";
-	cmd.Parameters.AddWithValue("@NOME", "Astronomia");
-	cmd.ExecuteNonQuery();
+foreach (var categoria in listaCategorie) // La lista è di categorie
+{
+	using (var ctx = new MyDbContext())
+	{
+		ctx.Categorie.Add(categoria);
+		ctx.SaveChanges();
+	}
 }
-
 
 // Aggiungo un libro
-/*
-using (var connection = new SqlConnection())
-{
-	connection.ConnectionString = "Server=localhost;Database=ProgettoEnterprise;User Id=enterprise;Password=enterprise;";
-	connection.Open();
 
-	var cmd = new SqlCommand();
-	cmd.Connection = connection;
-	cmd.CommandText = "INSERT INTO Libri(Nome, Autore, DataPubblicazione, Editore, IdCategoria) VALUES(@NOME,@AUTORE,@DATA_PUBBLICAZIONE,@EDITORE,@ID_CATEGORIA);";
-	cmd.Parameters.AddWithValue("@NOME", "Inseguendo un raggio di luce");
-	cmd.Parameters.AddWithValue("@AUTORE", "Amedeo Balbi");
-	cmd.Parameters.AddWithValue("@DATA_PUBBLICAZIONE", "28/09/2021");
-	cmd.Parameters.AddWithValue("@EDITORE", "Rizzoli");
-	cmd.Parameters.AddWithValue("@ID_CATEGORIA", "4"); // Fisica
-	cmd.ExecuteNonQuery();
+using (var ctx = new MyDbContext())
+{
+	var libro = new Libro
+	{
+		Nome = "Inseguendo un raggio di luce",
+		Autore = "Amedeo Balbi",
+		DataPubblicazione = new DateTime(2021, 9, 28),
+		Editore = "Rizzoli",
+		Categorie = new List<LibroCategoria> // Le categorie vengono aggiunte automaticamente anche al db, nella tabella LibriCategorie
+		{
+			new LibroCategoria
+			{
+				Categoria = ctx.Categorie.First(c => c.Nome == "Fisica")
+			},
+			new LibroCategoria
+			{
+				Categoria = ctx.Categorie.First(c => c.Nome == "Astronomia")
+			}
+		}
+	};
+
+	ctx.Libri.Add(libro);
+	ctx.SaveChanges();
 }
-*/
 
 {
 	var ctx = new MyDbContext();
 	var libri = ctx.Libri.ToList();
+	var categorie = ctx.Categorie.ToList();
+	var libriCategorie = ctx.LibriCategorie.ToList();
 }
 
 /*

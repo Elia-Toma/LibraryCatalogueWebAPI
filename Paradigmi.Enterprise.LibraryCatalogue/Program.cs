@@ -4,11 +4,16 @@ using Microsoft.EntityFrameworkCore;
 using Paradigmi.Enterprise.LibraryCatalogue.Data;
 using Paradigmi.Enterprise.Models.Context;
 using Paradigmi.Enterprise.Models.Entities;
-/*
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+/*
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(connectionString));
@@ -17,7 +22,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 	.AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
-//
+*/
 
 var app = builder.Build();
 
@@ -46,10 +51,10 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
-*/
 
 
 
+/*
 
 
 // TEST COLLEGAMENTO DB

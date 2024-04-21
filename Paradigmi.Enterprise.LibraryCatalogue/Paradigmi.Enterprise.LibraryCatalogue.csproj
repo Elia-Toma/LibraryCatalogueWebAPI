@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Paradigmi.Enterprise.Application\Paradigmi.Enterprise.Application.csproj" />
     <ProjectReference Include="..\Paradigmi.Enterprise.Models\Paradigmi.Enterprise.Models.csproj" />
   </ItemGroup>
 

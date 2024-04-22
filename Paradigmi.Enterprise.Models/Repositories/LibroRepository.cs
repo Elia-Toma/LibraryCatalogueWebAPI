@@ -13,5 +13,17 @@ namespace Paradigmi.Enterprise.Models.Repositories
 		public LibroRepository(MyDbContext ctx) : base(ctx)
 		{
 		}
+
+		public void DeleteLibro(int id)
+		{
+			DeleteCategorieAssociateAlLibro(id);
+			Elimina(id);
+		}
+
+		private void DeleteCategorieAssociateAlLibro(int id)
+		{
+			var libro = Ottieni(id);
+			_ctx.LibriCategorie.RemoveRange(_ctx.LibriCategorie.Where(lc => lc.IdLibro == libro.IdLibro));
+		}
 	}
 }

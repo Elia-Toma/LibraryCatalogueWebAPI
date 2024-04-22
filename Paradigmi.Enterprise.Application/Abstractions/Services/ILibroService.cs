@@ -2,5 +2,6 @@
 {
 	public interface ILibroService
 	{
+		void DeleteLibro(int id);
 	}
 }

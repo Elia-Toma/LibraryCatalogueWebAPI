@@ -6,6 +6,7 @@ using Paradigmi.Enterprise.Application.Services;
 using Paradigmi.Enterprise.LibraryCatalogue.Data;
 using Paradigmi.Enterprise.Models.Context;
 using Paradigmi.Enterprise.Models.Entities;
+using Paradigmi.Enterprise.Models.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +16,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<MyDbContext>(options =>
+{
+	options.UseSqlServer("data source=localhost;Initial catalog=ProgettoEnterprise;User Id=enterprise;Password=enterprise;TrustServerCertificate=True");
+});
+
 // Le astrazioni sono importanti per i middleware
 builder.Services.AddScoped<IUtenteService, UtenteService>();
+builder.Services.AddScoped<UtenteRepository>();
+
 builder.Services.AddScoped<ILibroService, LibroService>();
+builder.Services.AddScoped<LibroRepository>();
+
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<CategoriaRepository>();
 
 var app = builder.Build();
 
@@ -65,6 +76,9 @@ foreach (var categoria in listaCategorie) // La lista è di categorie
 
 using (var ctx = new MyDbContext())
 {
+
+	LibroRepository libroRepository = new LibroRepository(ctx);
+
 	var libro = new Libro
 	{
 		Nome = "Inseguendo un raggio di luce",
@@ -84,8 +98,35 @@ using (var ctx = new MyDbContext())
 		}
 	};
 
-	ctx.Libri.Add(libro);
-	ctx.SaveChanges();
+	libroRepository.Aggiungi(libro);
+	libroRepository.Save();
+}
+
+// Modifica di un libro
+
+using (var ctx = new MyDbContext())
+{
+	LibroRepository libroRepository = new LibroRepository(ctx);
+
+	var libro = ctx.Libri.First(l => l.Nome == "Inseguendo un raggio di luce");
+	libro.Autore = "Amedeo Balbi astrofisico";
+	libroRepository.Modifica(libro);
+	libroRepository.Save();
+}
+
+// Eliminazione di un libro
+
+using (var ctx = new MyDbContext())
+{
+	LibroRepository libroRepository = new LibroRepository(ctx);
+
+	var libro = ctx.Libri.First(l => l.Nome == "Inseguendo un raggio di luce");
+
+	// Elimino le categorie associate al libro (se non lo faccio, non posso eliminare il libro)
+	//ctx.LibriCategorie.RemoveRange(ctx.LibriCategorie.Where(lc => lc.IdLibro == libro.IdLibro));
+
+	libroRepository.DeleteLibro(libro.IdLibro); // Mio metodo
+	libroRepository.Save();
 }
 
 {

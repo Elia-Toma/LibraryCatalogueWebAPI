@@ -9,10 +9,10 @@ namespace Paradigmi.Enterprise.Models.Entities
 	public class Libro
 	{
 		public int IdLibro { get; set; }
-		public string Nome { get; set; }
-		public string Autore { get; set; }
+		public string Nome { get; set; } = string.Empty;
+		public string Autore { get; set; } = string.Empty;
 		public DateTime DataPubblicazione { get; set; }
-		public string Editore { get; set; }
+		public string Editore { get; set; } = string.Empty;
 
 		public virtual ICollection<LibroCategoria> Categorie { get; set; }
 	}

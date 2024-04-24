@@ -6,10 +6,10 @@ namespace Paradigmi.Enterprise.Application.Models.Requests
 	{
 		public string Nome { get; set; } = string.Empty;
 		public string Autore { get; set; } = string.Empty;
-		//public DateTime DataPubblicazione { get; set; }
+		public DateTime DataPubblicazione { get; set; }
 		public string Editore { get; set; } = string.Empty;
 
-		//public virtual ICollection<LibroCategoria> Categorie { get; set; }
+		public virtual ICollection<LibroCategoria> Categorie { get; set; }
 
 		public Libro ToEntity()
 		{
@@ -17,7 +17,7 @@ namespace Paradigmi.Enterprise.Application.Models.Requests
 			{
 				Nome = Nome,
 				Autore = Autore,
-				//DataPubblicazione = DataPubblicazione,
+				DataPubblicazione = DataPubblicazione,
 				Editore = Editore
 			};
 		}

@@ -1,4 +1,6 @@
 using System.Data.SqlClient;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Paradigmi.Enterprise.Application.Abstractions.Services;
@@ -15,6 +17,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssembly(
+	AppDomain.CurrentDomain.GetAssemblies().
+		SingleOrDefault(assembly => assembly.GetName().Name == "Paradigmi.Enterprise.Application")
+	);
 
 builder.Services.AddDbContext<MyDbContext>(options =>
 {
@@ -42,6 +49,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

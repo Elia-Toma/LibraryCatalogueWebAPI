@@ -16,7 +16,6 @@ namespace Paradigmi.Enterprise.Application.Models.Dtos
 			DataPubblicazione = libro.DataPubblicazione;
 			Editore = libro.Editore;
 
-			// Non so se questa va bene
 			Categorie = libro.Categorie;
 		}
 
@@ -26,7 +25,6 @@ namespace Paradigmi.Enterprise.Application.Models.Dtos
 		public DateTime DataPubblicazione { get; set; }
 		public string Editore { get; set; } = string.Empty;
 
-		// Non so se questa va bene
 		public virtual ICollection<LibroCategoria> Categorie { get; set; }
 	}
 }

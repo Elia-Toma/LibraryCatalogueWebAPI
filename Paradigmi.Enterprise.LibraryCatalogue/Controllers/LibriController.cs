@@ -3,6 +3,7 @@ using Paradigmi.Enterprise.Application.Abstractions.Services;
 using Paradigmi.Enterprise.Application.Models.Requests;
 using Paradigmi.Enterprise.Application.Models.Responses;
 using Paradigmi.Enterprise.Application.Models.Dtos;
+using Paradigmi.Enterprise.Models.Entities;
 
 namespace Paradigmi.Enterprise.LibraryCatalogue.Controllers
 {
@@ -37,18 +38,26 @@ namespace Paradigmi.Enterprise.LibraryCatalogue.Controllers
 			response.Libro = new LibroDto(libro);
 			return Ok(response);
 		}
+		
 		/*
 		[HttpPost]
 		[Route("update")]
-		public IActionResult UpdateLibro(UpdateLibroRequest request)
+		public IActionResult UpdateLibro(int id, CreateLibroRequest request)
 		{
 			var libro = request.ToEntity();
 			_libroService.UpdateLibro(libro);
 
-			var response = new UpdateLibroResponse();
+			var response = new CreateLibroResponse();
 			response.Libro = new LibroDto(libro);
 			return Ok(response);
 		}
 		*/
+
+		[HttpGet]
+		[Route("get/nome")]
+		public Libro GetLibroDaNome(string nome)
+		{
+			return _libroService.GetLibroDaNome(nome);
+		}
 	}
 }

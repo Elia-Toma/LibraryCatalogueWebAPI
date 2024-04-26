@@ -24,5 +24,10 @@ namespace Paradigmi.Enterprise.Models.Repositories
 		{
 			_ctx.LibriCategorie.RemoveRange(_ctx.LibriCategorie.Where(lc => lc.IdLibro == id));
 		}
+
+		public Libro GetLibroDaNome(string nome)
+		{
+			return _ctx.Libri.First(l => l.Nome == nome);
+		}
 	}
 }

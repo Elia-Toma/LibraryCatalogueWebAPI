@@ -25,6 +25,11 @@ namespace Paradigmi.Enterprise.Application.Services
 			_libroRepository.Save();
 		}
 
+		public Libro GetLibroDaNome(string nome)
+		{
+			return _libroRepository.GetLibroDaNome(nome);
+		}
+
 		public void UpdateLibro(Libro libro)
 		{
 			_libroRepository.Modifica(libro);

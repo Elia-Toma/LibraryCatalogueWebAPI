@@ -7,5 +7,6 @@ namespace Paradigmi.Enterprise.Application.Abstractions.Services
 		void DeleteLibro(int id);
 		void CreateLibro(Libro libro);
 		void UpdateLibro(Libro libro);
+		Libro GetLibroDaNome(string nome);
 	}
 }

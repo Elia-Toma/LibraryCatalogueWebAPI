@@ -1,4 +1,5 @@
-﻿using Paradigmi.Enterprise.Models.Entities;
+﻿using Paradigmi.Enterprise.Models.Context;
+using Paradigmi.Enterprise.Models.Entities;
 
 namespace Paradigmi.Enterprise.Application.Models.Requests
 {
@@ -9,17 +10,20 @@ namespace Paradigmi.Enterprise.Application.Models.Requests
 		public DateTime DataPubblicazione { get; set; }
 		public string Editore { get; set; } = string.Empty;
 
-		public virtual ICollection<LibroCategoria> Categorie { get; set; }
+		//public virtual ICollection<LibroCategoria> Categorie { get; set; }
 
 		public Libro ToEntity()
 		{
-			return new Libro
+			var libro = new Libro
 			{
 				Nome = Nome,
 				Autore = Autore,
 				DataPubblicazione = DataPubblicazione,
-				Editore = Editore
+				Editore = Editore,
+				Categorie = new List<LibroCategoria>()
 			};
+
+			return libro;
 		}
 	}
 }

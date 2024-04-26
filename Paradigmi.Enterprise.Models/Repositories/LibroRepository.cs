@@ -22,7 +22,6 @@ namespace Paradigmi.Enterprise.Models.Repositories
 
 		private void DeleteCategorieAssociateAlLibro(int id)
 		{
-			//var libro = Ottieni(id);
 			_ctx.LibriCategorie.RemoveRange(_ctx.LibriCategorie.Where(lc => lc.IdLibro == id));
 		}
 	}

@@ -1,7 +1,9 @@
-﻿namespace Paradigmi.Enterprise.Application.Abstractions.Services
+﻿using Paradigmi.Enterprise.Models.Entities;
+
+namespace Paradigmi.Enterprise.Application.Abstractions.Services
 {
 	public interface ICategoriaService
 	{
-		void CreateCategoria(string nome);
+		void CreateCategoria(Categoria categoria);
 	}
 }

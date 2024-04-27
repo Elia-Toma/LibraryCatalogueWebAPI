@@ -14,16 +14,12 @@ namespace Paradigmi.Enterprise.Models.Repositories
 		{
 		}
 
-		public void CreateCategoria(string nome)
+		public void CreateCategoria(Categoria categoria)
 		{
-			if (_ctx.Categorie.Any(c => c.Nome == nome))
+			if (_ctx.Categorie.Any(c => c.Nome == categoria.Nome))
 			{
 				throw new InvalidOperationException("Categoria già esistente");
 			}
-			var categoria = new Categoria
-			{
-				Nome = nome
-			};
 			Aggiungi(categoria);
 		}
 	}

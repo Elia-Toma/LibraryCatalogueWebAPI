@@ -1,4 +1,5 @@
 ﻿using Paradigmi.Enterprise.Application.Abstractions.Services;
+using Paradigmi.Enterprise.Models.Entities;
 using Paradigmi.Enterprise.Models.Repositories;
 
 namespace Paradigmi.Enterprise.Application.Services
@@ -12,9 +13,9 @@ namespace Paradigmi.Enterprise.Application.Services
 			_categoriaRepository = categoriaRepository;
 		}
 
-		public void CreateCategoria(string nome)
+		public void CreateCategoria(Categoria categoria)
 		{
-			_categoriaRepository.CreateCategoria(nome);
+			_categoriaRepository.CreateCategoria(categoria);
 			_categoriaRepository.Save();
 		}
 	}

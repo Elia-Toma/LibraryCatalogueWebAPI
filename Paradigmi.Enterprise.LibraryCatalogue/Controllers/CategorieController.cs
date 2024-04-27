@@ -28,5 +28,13 @@ namespace Paradigmi.Enterprise.LibraryCatalogue.Controllers
 			response.Categoria = new CategoriaDto(categoria);
 			return Ok(response);
 		}
+
+		[HttpDelete]
+		[Route("delete/{id:int}")]
+		public IActionResult DeleteCategoria(int id)
+		{
+			_categoriaService.DeleteCategoriaVuota(id);
+			return Ok();
+		}
 	}
 }

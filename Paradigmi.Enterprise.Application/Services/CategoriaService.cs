@@ -18,5 +18,11 @@ namespace Paradigmi.Enterprise.Application.Services
 			_categoriaRepository.CreateCategoria(categoria);
 			_categoriaRepository.Save();
 		}
+
+		public void DeleteCategoriaVuota(int id)
+		{
+			_categoriaRepository.DeleteCategoriaVuota(id);
+			_categoriaRepository.Save();
+		}
 	}
 }

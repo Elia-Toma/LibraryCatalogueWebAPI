@@ -22,5 +22,14 @@ namespace Paradigmi.Enterprise.Models.Repositories
 			}
 			Aggiungi(categoria);
 		}
+
+		public void DeleteCategoriaVuota(int id)
+		{
+			if (_ctx.LibriCategorie.Any(l => l.IdCategoria == id))
+			{
+				throw new InvalidOperationException("Categoria non vuota");
+			}
+			Elimina(id);
+		}
 	}
 }

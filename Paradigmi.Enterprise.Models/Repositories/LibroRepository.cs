@@ -34,5 +34,12 @@ namespace Paradigmi.Enterprise.Models.Repositories
 		{
 			return _ctx.Libri.Where(l => l.Autore == autore).ToList();
 		}
+
+		public List<Libro> GetLibriDaCategoria(string categoria)
+		{
+			var idCategoria = _ctx.Categorie.First(c => c.Nome == categoria).IdCategoria;
+			var idLibri = _ctx.LibriCategorie.Where(lc => lc.IdCategoria == idCategoria).Select(lc => lc.IdLibro).ToList();
+			return _ctx.Libri.Where(l => idLibri.Contains(l.IdLibro)).ToList();
+		}
 	}
 }

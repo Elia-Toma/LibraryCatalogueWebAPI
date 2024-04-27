@@ -9,5 +9,6 @@ namespace Paradigmi.Enterprise.Application.Abstractions.Services
 		void UpdateLibro(Libro libro);
 		Libro GetLibroDaNome(string nome);
 		List<Libro> GetLibriDaAutore(string autore);
+		List<Libro> GetLibriDaCategoria(string categoria);
 	}
 }

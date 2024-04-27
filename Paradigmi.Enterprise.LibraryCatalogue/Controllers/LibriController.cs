@@ -70,5 +70,16 @@ namespace Paradigmi.Enterprise.LibraryCatalogue.Controllers
 			response.Libri = libri.Select(l => new LibroDto(l)).ToList();
 			return Ok(response);
 		}
+
+		[HttpGet]
+		[Route("get/categoria")]
+		public IActionResult GetLibriDaCategoria(string categoria)
+		{
+			var libri = _libroService.GetLibriDaCategoria(categoria);
+
+			var response = new GetLibriResponse();
+			response.Libri = libri.Select(l => new LibroDto(l)).ToList();
+			return Ok(response);
+		}
 	}
 }

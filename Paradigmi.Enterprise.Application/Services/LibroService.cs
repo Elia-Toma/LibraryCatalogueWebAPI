@@ -30,6 +30,11 @@ namespace Paradigmi.Enterprise.Application.Services
 			return _libroRepository.GetLibriDaAutore(autore);
 		}
 
+		public List<Libro> GetLibriDaCategoria(string categoria)
+		{
+			return _libroRepository.GetLibriDaCategoria(categoria);
+		}
+
 		public Libro GetLibroDaNome(string nome)
 		{
 			return _libroRepository.GetLibroDaNome(nome);

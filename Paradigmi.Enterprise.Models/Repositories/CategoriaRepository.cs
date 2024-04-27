@@ -13,5 +13,18 @@ namespace Paradigmi.Enterprise.Models.Repositories
 		public CategoriaRepository(MyDbContext ctx) : base(ctx)
 		{
 		}
+
+		public void CreateCategoria(string nome)
+		{
+			if (_ctx.Categorie.Any(c => c.Nome == nome))
+			{
+				throw new InvalidOperationException("Categoria già esistente");
+			}
+			var categoria = new Categoria
+			{
+				Nome = nome
+			};
+			Aggiungi(categoria);
+		}
 	}
 }

@@ -2,5 +2,6 @@
 {
 	public interface ICategoriaService
 	{
+		void CreateCategoria(string nome);
 	}
 }

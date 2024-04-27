@@ -10,5 +10,6 @@ namespace Paradigmi.Enterprise.Application.Abstractions.Services
 		Libro GetLibroDaNome(string nome);
 		List<Libro> GetLibriDaAutore(string autore);
 		List<Libro> GetLibriDaCategoria(string categoria);
+		List<Libro> GetLibriDaDataPubblicazione(DateTime data);
 	}
 }

@@ -35,6 +35,11 @@ namespace Paradigmi.Enterprise.Application.Services
 			return _libroRepository.GetLibriDaCategoria(categoria);
 		}
 
+		public List<Libro> GetLibriDaDataPubblicazione(DateTime data)
+		{
+			return _libroRepository.GetLibriDaDataPubblicazione(data);
+		}
+
 		public Libro GetLibroDaNome(string nome)
 		{
 			return _libroRepository.GetLibroDaNome(nome);

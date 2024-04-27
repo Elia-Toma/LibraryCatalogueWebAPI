@@ -41,5 +41,10 @@ namespace Paradigmi.Enterprise.Models.Repositories
 			var idLibri = _ctx.LibriCategorie.Where(lc => lc.IdCategoria == idCategoria).Select(lc => lc.IdLibro).ToList();
 			return _ctx.Libri.Where(l => idLibri.Contains(l.IdLibro)).ToList();
 		}
+
+		public List<Libro> GetLibriDaDataPubblicazione(DateTime data)
+		{
+			return _ctx.Libri.Where(l => l.DataPubblicazione == data).ToList();
+		}
 	}
 }

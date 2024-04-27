@@ -25,19 +25,19 @@ namespace Paradigmi.Enterprise.Application.Services
 			_libroRepository.Save();
 		}
 
-		public List<Libro> GetLibriDaAutore(string autore)
+		public List<Libro> GetLibriDaAutore(int from, int num, string? autore, out int totalNum)
 		{
-			return _libroRepository.GetLibriDaAutore(autore);
+			return _libroRepository.GetLibriDaAutore(from, num, autore, out totalNum);
 		}
 
-		public List<Libro> GetLibriDaCategoria(string categoria)
+		public List<Libro> GetLibriDaCategoria(int from, int num, string? categoria, out int totalNum)
 		{
-			return _libroRepository.GetLibriDaCategoria(categoria);
+			return _libroRepository.GetLibriDaCategoria(from, num, categoria, out totalNum);
 		}
 
-		public List<Libro> GetLibriDaDataPubblicazione(DateTime data)
+		public List<Libro> GetLibriDaDataPubblicazione(int from, int num, DateTime? data, out int totalNum)
 		{
-			return _libroRepository.GetLibriDaDataPubblicazione(data);
+			return _libroRepository.GetLibriDaDataPubblicazione(from, num, data, out totalNum);
 		}
 
 		public Libro GetLibroDaNome(string nome)

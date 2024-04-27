@@ -60,36 +60,48 @@ namespace Paradigmi.Enterprise.LibraryCatalogue.Controllers
 			return _libroService.GetLibroDaNome(nome);
 		}
 
-		[HttpGet]
+		[HttpPost]
 		[Route("get/autore")]
-		public IActionResult GetLibriDaAutore(string autore)
+		public IActionResult GetLibriDaAutore(GetLibriDaAutoreRequest request)
 		{
-			var libri = _libroService.GetLibriDaAutore(autore);
+			int totalNum = 0;
+			var libri = _libroService.GetLibriDaAutore(request.PageNumber * request.PageSize, request.PageSize, request.Autore, out totalNum);
 
 			var response = new GetLibriResponse();
+			var pageFounded = (totalNum / (decimal)request.PageSize);
+			response.NumeroPagine = (int)Math.Ceiling(pageFounded);
 			response.Libri = libri.Select(l => new LibroDto(l)).ToList();
+
 			return Ok(response);
 		}
 
-		[HttpGet]
+		[HttpPost]
 		[Route("get/categoria")]
-		public IActionResult GetLibriDaCategoria(string categoria)
+		public IActionResult GetLibriDaCategoria(GetLibriDaCategoriaRequest request)
 		{
-			var libri = _libroService.GetLibriDaCategoria(categoria);
+			int totalNum = 0;
+			var libri = _libroService.GetLibriDaCategoria(request.PageNumber * request.PageSize, request.PageSize, request.Categoria, out totalNum);
 
 			var response = new GetLibriResponse();
+			var pageFounded = (totalNum / (decimal)request.PageSize);
+			response.NumeroPagine = (int)Math.Ceiling(pageFounded);
 			response.Libri = libri.Select(l => new LibroDto(l)).ToList();
+
 			return Ok(response);
 		}
 
-		[HttpGet]
+		[HttpPost]
 		[Route("get/data")]
-		public IActionResult GetLibriDaDataPubblicazione(DateTime data)
+		public IActionResult GetLibriDaDataPubblicazione(GetLibriDaDataPubblicazioneRequest request)
 		{
-			var libri = _libroService.GetLibriDaDataPubblicazione(data);
+			int totalNum = 0;
+			var libri = _libroService.GetLibriDaDataPubblicazione(request.PageNumber * request.PageSize, request.PageSize, request.DataPubblicazione, out totalNum);
 
 			var response = new GetLibriResponse();
+			var pageFounded = (totalNum / (decimal)request.PageSize);
+			response.NumeroPagine = (int)Math.Ceiling(pageFounded);
 			response.Libri = libri.Select(l => new LibroDto(l)).ToList();
+
 			return Ok(response);
 		}
 	}

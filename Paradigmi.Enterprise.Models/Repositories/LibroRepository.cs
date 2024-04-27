@@ -30,21 +30,61 @@ namespace Paradigmi.Enterprise.Models.Repositories
 			return _ctx.Libri.First(l => l.Nome == nome);
 		}
 
-		public List<Libro> GetLibriDaAutore(string autore)
+		public List<Libro> GetLibriDaAutore(int from, int num, string? autore, out int totalNum)
 		{
-			return _ctx.Libri.Where(l => l.Autore == autore).ToList();
+			var query = _ctx.Libri.AsQueryable();
+			if (!string.IsNullOrEmpty(autore))
+			{
+				query = query.Where(l => l.Autore.ToLower().Contains(autore.ToLower()));
+			}
+
+			totalNum = query.Count();
+
+			return
+				query
+				.OrderBy(o => o.Autore)
+				.Skip(from)
+				.Take(num)
+				.ToList();
 		}
 
-		public List<Libro> GetLibriDaCategoria(string categoria)
+		public List<Libro> GetLibriDaCategoria(int from, int num, string? categoria, out int totalNum)
 		{
 			var idCategoria = _ctx.Categorie.First(c => c.Nome == categoria).IdCategoria;
 			var idLibri = _ctx.LibriCategorie.Where(lc => lc.IdCategoria == idCategoria).Select(lc => lc.IdLibro).ToList();
-			return _ctx.Libri.Where(l => idLibri.Contains(l.IdLibro)).ToList();
+
+			var query = _ctx.Libri.AsQueryable();
+			if (!string.IsNullOrEmpty(categoria))
+			{
+				query = query.Where(l => idLibri.Contains(l.IdLibro));
+			}
+
+			totalNum = query.Count();
+
+			return
+				query
+				.OrderBy(o => o.Autore)
+				.Skip(from)
+				.Take(num)
+				.ToList();
 		}
 
-		public List<Libro> GetLibriDaDataPubblicazione(DateTime data)
+		public List<Libro> GetLibriDaDataPubblicazione(int from, int num, DateTime? data, out int totalNum)
 		{
-			return _ctx.Libri.Where(l => l.DataPubblicazione == data).ToList();
+			var query = _ctx.Libri.AsQueryable();
+			if (data.HasValue)
+			{
+				query = query.Where(l => l.DataPubblicazione == data);
+			}
+
+			totalNum = query.Count();
+
+			return
+				query
+				.OrderBy(o => o.DataPubblicazione)
+				.Skip(from)
+				.Take(num)
+				.ToList();
 		}
 	}
 }

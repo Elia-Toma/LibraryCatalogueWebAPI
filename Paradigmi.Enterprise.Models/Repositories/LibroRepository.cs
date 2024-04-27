@@ -29,5 +29,10 @@ namespace Paradigmi.Enterprise.Models.Repositories
 		{
 			return _ctx.Libri.First(l => l.Nome == nome);
 		}
+
+		public List<Libro> GetLibriDaAutore(string autore)
+		{
+			return _ctx.Libri.Where(l => l.Autore == autore).ToList();
+		}
 	}
 }

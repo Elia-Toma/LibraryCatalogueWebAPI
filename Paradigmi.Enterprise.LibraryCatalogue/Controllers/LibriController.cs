@@ -59,5 +59,16 @@ namespace Paradigmi.Enterprise.LibraryCatalogue.Controllers
 		{
 			return _libroService.GetLibroDaNome(nome);
 		}
+
+		[HttpGet]
+		[Route("get/autore")]
+		public IActionResult GetLibriDaAutore(string autore)
+		{
+			var libri = _libroService.GetLibriDaAutore(autore);
+
+			var response = new GetLibriResponse();
+			response.Libri = libri.Select(l => new LibroDto(l)).ToList();
+			return Ok(response);
+		}
 	}
 }

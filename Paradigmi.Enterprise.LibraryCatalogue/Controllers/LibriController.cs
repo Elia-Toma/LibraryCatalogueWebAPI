@@ -31,27 +31,26 @@ namespace Paradigmi.Enterprise.LibraryCatalogue.Controllers
 		public IActionResult CreateLibro(CreateLibroRequest request)
 		{
 			// Su Swagger si possono aggiungere più categorie
+			// Swagger restituisce un errore ma l'API funziona, i dati vengono inseriti correttamente
 			var libro = request.ToEntity();
-			_libroService.CreateLibro(libro);
+			_libroService.CreateLibro(libro, request.NomiCategorie);
 
 			var response = new CreateLibroResponse();
 			response.Libro = new LibroDto(libro);
 			return Ok(response);
 		}
 		
-		/*
-		[HttpPost]
+		[HttpPut]
 		[Route("update")]
-		public IActionResult UpdateLibro(int id, CreateLibroRequest request)
+		public IActionResult UpdateLibro(UpdateLibroRequest request)
 		{
 			var libro = request.ToEntity();
-			_libroService.UpdateLibro(libro);
+			_libroService.UpdateLibro(request.IdLibro, libro);
 
-			var response = new CreateLibroResponse();
+			var response = new UpdateLibroResponse();
 			response.Libro = new LibroDto(libro);
 			return Ok(response);
 		}
-		*/
 
 		[HttpGet]
 		[Route("get/nome")]

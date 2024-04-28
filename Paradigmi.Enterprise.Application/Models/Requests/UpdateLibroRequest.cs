@@ -1,16 +1,14 @@
-﻿using Paradigmi.Enterprise.Models.Context;
-using Paradigmi.Enterprise.Models.Entities;
+﻿using Paradigmi.Enterprise.Models.Entities;
 
 namespace Paradigmi.Enterprise.Application.Models.Requests
 {
-	public class CreateLibroRequest
+	public class UpdateLibroRequest
 	{
+		public int IdLibro { get; set; }
 		public string Nome { get; set; } = string.Empty;
 		public string Autore { get; set; } = string.Empty;
 		public DateTime DataPubblicazione { get; set; }
 		public string Editore { get; set; } = string.Empty;
-
-		public virtual ICollection<string> NomiCategorie { get; set; }
 
 		public Libro ToEntity()
 		{

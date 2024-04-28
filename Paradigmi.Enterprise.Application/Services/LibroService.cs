@@ -13,9 +13,9 @@ namespace Paradigmi.Enterprise.Application.Services
 			_libroRepository = libroRepository;
 		}
 
-		public void CreateLibro(Libro libro)
+		public void CreateLibro(Libro libro, ICollection<string> nomiCategorie)
 		{
-			_libroRepository.Aggiungi(libro);
+			_libroRepository.CreateLibro(libro, nomiCategorie);
 			_libroRepository.Save();
 		}
 
@@ -45,9 +45,9 @@ namespace Paradigmi.Enterprise.Application.Services
 			return _libroRepository.GetLibroDaNome(nome);
 		}
 
-		public void UpdateLibro(Libro libro)
+		public void UpdateLibro(int id, Libro libro)
 		{
-			_libroRepository.Modifica(libro);
+			_libroRepository.UpdateLibro(id, libro);
 			_libroRepository.Save();
 		}
 	}

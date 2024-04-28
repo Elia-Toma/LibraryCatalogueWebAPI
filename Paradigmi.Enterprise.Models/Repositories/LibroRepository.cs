@@ -14,6 +14,22 @@ namespace Paradigmi.Enterprise.Models.Repositories
 		{
 		}
 
+		public void CreateLibro(Libro libro, ICollection<string> nomiCategorie)
+		{
+			if (nomiCategorie != null)
+			{
+				foreach (var nomeCategoria in nomiCategorie)
+				{
+					libro.Categorie.Add(new LibroCategoria
+					{
+						Categoria = _ctx.Categorie.First(c => c.Nome == nomeCategoria)
+					});
+				}
+			}
+
+			Aggiungi(libro);
+		}
+
 		public void DeleteLibro(int id)
 		{
 			DeleteCategorieAssociateAlLibro(id);
@@ -85,6 +101,17 @@ namespace Paradigmi.Enterprise.Models.Repositories
 				.Skip(from)
 				.Take(num)
 				.ToList();
+		}
+
+		public void UpdateLibro(int id, Libro libro)
+		{
+			var libroDaAggiornare = _ctx.Libri.Find(id);
+			libroDaAggiornare.Nome = libro.Nome;
+			libroDaAggiornare.Autore = libro.Autore;
+			libroDaAggiornare.DataPubblicazione = libro.DataPubblicazione;
+			libroDaAggiornare.Editore = libro.Editore;
+
+			Modifica(libroDaAggiornare);
 		}
 	}
 }

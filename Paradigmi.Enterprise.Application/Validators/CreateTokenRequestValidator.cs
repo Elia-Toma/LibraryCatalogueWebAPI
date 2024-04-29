@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Paradigmi.Enterprise.Application.Extensions;
 using Paradigmi.Enterprise.Application.Models.Requests;
 
 namespace Paradigmi.Enterprise.Application.Validators
@@ -12,7 +13,7 @@ namespace Paradigmi.Enterprise.Application.Validators
                 .WithMessage("Il campo username è obbligatorio")
                 .NotNull()
                 .WithMessage("Il campo username non può essere nullo");
-            /*
+            
             RuleFor(r => r.Password)
                 .NotEmpty()
                 .WithMessage("Il campo password è obbligatorio")
@@ -22,7 +23,7 @@ namespace Paradigmi.Enterprise.Application.Validators
                 .WithMessage("Il campo password deve essere almeno lungo 6 caratteri")
                 .RegEx("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*()_+{}\\[\\]:;<>,.?~\\\\-]).{6,}$"
                 , "Il campo password deve essere lungo almeno 6 caratteri e deve contenere almeno un carattere maiuscolo, uno minuscolo, un numero e un carattere speciale"
-                );*/
+                );
 		}
 	}
 }

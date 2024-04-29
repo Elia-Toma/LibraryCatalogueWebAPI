@@ -3,11 +3,14 @@ using Paradigmi.Enterprise.Application.Abstractions.Services;
 using Paradigmi.Enterprise.Application.Models.Requests;
 using Paradigmi.Enterprise.Application.Models.Responses;
 using Paradigmi.Enterprise.Application.Models.Dtos;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Paradigmi.Enterprise.LibraryCatalogue.Controllers
 {
 	[ApiController]
 	[Route("api/v1/[controller]")]
+	[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 	public class CategorieController : ControllerBase
 	{
 		private readonly ICategoriaService _categoriaService;

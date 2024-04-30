@@ -8,11 +8,13 @@ namespace Paradigmi.Enterprise.Application.Validators
 	{
 		public CreateTokenRequestValidator()
 		{
-			RuleFor(r => r.Username)
+			RuleFor(r => r.Email)
                 .NotEmpty()
-                .WithMessage("Il campo username è obbligatorio")
+                .WithMessage("Il campo email è obbligatorio")
                 .NotNull()
-                .WithMessage("Il campo username non può essere nullo");
+                .WithMessage("Il campo email non può essere nullo")
+				.EmailAddress()
+				.WithMessage("Il campo Email non è un indirizzo email valido");
             
             RuleFor(r => r.Password)
                 .NotEmpty()

@@ -23,6 +23,7 @@ namespace Paradigmi.Enterprise.Models.Extensions
 			services.AddScoped<UtenteRepository>();
 			services.AddScoped<LibroRepository>();
 			services.AddScoped<CategoriaRepository>();
+			services.AddScoped<TokenRepository>();
 
 			return services;
 		}

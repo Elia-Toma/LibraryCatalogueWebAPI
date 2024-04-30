@@ -6,29 +6,37 @@ using Paradigmi.Enterprise.Application.Models.Requests;
 using System.Text;
 using Paradigmi.Enterprise.Application.Options;
 using Microsoft.Extensions.Options;
+using Paradigmi.Enterprise.Models.Repositories;
 
 namespace Paradigmi.Enterprise.Application.Services
 {
 	public class TokenService : ITokenService
 	{
 		private readonly JwtAuthenticationOption _jwtAuthOption;
+		private readonly TokenRepository _tokenRepository;
 
-		public TokenService(IOptions<JwtAuthenticationOption> jwtAuthOption)
+		public TokenService(IOptions<JwtAuthenticationOption> jwtAuthOption, TokenRepository tokenRepository)
 		{
 			_jwtAuthOption = jwtAuthOption.Value;
+			_tokenRepository = tokenRepository;
 		}
 
 		public string CreateToken(CreateTokenRequest request)
 		{
-			//STEP 1 : Verificare esattezza della coppia username/password
-			//TODO : Effettuare la verifica
-			//STEP 2 : Se username/password corrette creo il token con le claims necessarie
-			//TODO : Prendere i parametri dalla configurazione
-			//TODO : Prendere le claims dal database
+			var utente = _tokenRepository.getUtenteDaDB(request.Email, request.Password);
 
 			List<Claim> claims = new List<Claim>();
-			claims.Add(new Claim("Nome", "Elia"));
-			claims.Add(new Claim("Cognome", "Toma"));
+
+			if (utente != null)
+			{
+				claims.Add(new Claim("Nome", utente.Nome));
+				claims.Add(new Claim("Cognome", utente.Cognome));
+			}
+			else
+			{
+				throw new Exception("Utente non trovato");
+			}
+
 			var securityKey = new SymmetricSecurityKey(
 				Encoding.UTF8.GetBytes(_jwtAuthOption.Key)
 				);
@@ -43,7 +51,7 @@ namespace Paradigmi.Enterprise.Application.Services
 				);
 
 			var token = new JwtSecurityTokenHandler().WriteToken(securityToken);
-			//STEP 3 : Restituisco il token
+
 			return token;
 		}
 	}

@@ -20,7 +20,6 @@ namespace Paradigmi.Enterprise.LibraryCatalogue.Controllers
 		[Route("create")]
 		public IActionResult Create(CreateTokenRequest request)
 		{
-
 			string token = _tokenService.CreateToken(request);
 			return Ok(new CreateTokenResponse(token));
 		}

@@ -47,4 +47,9 @@ Questa web API permette la gestione di un catalogo di una libreria, con le segue
 - SQL Server
 
 ## Istruzioni per l'installazione e l'utilizzo
-1. 
+1. Aprire Visual Studio e clonare la repository del progetto
+2. Aprire SQL Server Management Studio e creare un nuovo database chiamato "ProgettoEnterprise" (senza virgolette)
+3. Una volta creato il DB, si può fare il restore delle tabelle eseguendo il codice fornito al percorso /Paradigmi.Enterprise.Models/Database/dump.sql in una nuova query
+4. Sempre in SQL Server, creare un nuovo utente che abbia questo DB come default e che sia owner. L'autenticazione deve essere del tipo "SQL Server Authentication" e va disattivato "Enforce password policy"
+5. Username e password dell'utente devono essere entrambi "enterprise"
+6. Per avviare il progetto è sufficiente eseguirlo da Visual Studio
